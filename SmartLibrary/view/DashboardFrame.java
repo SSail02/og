@@ -22,12 +22,18 @@ public class DashboardFrame extends JFrame {
     private final AlertThread alertThread = new AlertThread(libraryController);
 
     public DashboardFrame() {
-        setTitle("Smart Library Assistant Pro - Dashboard");
-        setSize(900, 500);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setLocationRelativeTo(null);
-        initializeUi();
-        alertThread.start();
+    setTitle("Smart Library Assistant Pro - Dashboard");
+    setSize(900, 500);
+    setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    setLocationRelativeTo(null);
+
+    libraryController.syncBooksFromDatabase();
+
+    initializeUi();
+
+    libraryPanel.refreshTable(libraryController.getBooks());
+
+    alertThread.start();
     }
 
     private void initializeUi() {
